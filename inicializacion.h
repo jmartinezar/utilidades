@@ -24,6 +24,6 @@ double rk4(fptr fun, double x, double y, double h);
 void integracion_rk4(fptr fun, fptr2 alg, double h, double valor_inicial);
 
 double cambio_max(fptr2 alg, fptr fun, double h);
-double h_estable(fptr2 alg, fptr fun, double eps, double valor_inicial);
+double h_estable(fptr2 alg, fptr fun, double valor_inicial);
 
 #endif

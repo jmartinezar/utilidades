@@ -1,5 +1,5 @@
 #include <iostream>
-#include "inicialización.h"
+#include "inicializacion.h"
 #include <fstream>
 #include <cmath>
 
@@ -25,7 +25,7 @@ void integracion_euler(fptr fun, fptr2 alg, double h, double valor_inicial)
   int N = (XMAX - XMIN)/h;
   for(int i = 0; i<=N; ++i)
   {
-    double xi = XMIN + i*dx;
+    double xi = XMIN + i*h;
     fout << xi << "\t" << aux << "\n";
     aux = euler(fun, xi, aux, h);
   }
@@ -49,7 +49,7 @@ void integracion_rk4(fptr fun, fptr2 alg, double h, double valor_inicial)
   int N = (XMAX - XMIN)/h;
   for(int i=0; i<=N; ++i)
   {
-    double xi = XMIN + dx*i;
+    double xi = XMIN + h*i;
     fout << xi << "\t" << aux << "\n";
     aux = rk4(fun, xi, aux, h);
   }
@@ -73,17 +73,13 @@ double cambio_max(fptr2 alg, fptr fun, double h, double valor_inicial)
   return aux;
 }
 
-double h_estable(fptr2 alg, fptr fun, double eps, double valor_inicial)
+double h_estable(fptr2 alg, fptr fun, double valor_inicial)
 {
   double h;
- for(int i=0; i<500; ++i)
+ for(int i=0; i<5; ++i)
  {
    h = std::pow(1.5, -i);
    ++i;
-   if(cambio_max(alg, fun, h, valor_inicial)<=eps)
-   {
-     break;
-   }
  }
 return h;
 }
